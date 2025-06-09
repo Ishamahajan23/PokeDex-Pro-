@@ -24,16 +24,13 @@ const pokemonSlice = createSlice({
     },
     reducers:{
         setFilter(state, action){
-            state.filter = action.payload;
             if (action.payload === "all") {
                 state.list = state.list;
+            } else {
+                state.list = state.list.filter(pokemon => pokemon.types.some(type => type.type.name === action.payload));
             }
-            if (action.payload === "fire") {
-                state.list = state.list.filter(pokemon => pokemon.types.some(type => type.type.name === "fire"));
-            }
-            else if (action.payload === "water") {
-                state.list = state.list.filter(pokemon => pokemon.types.some(type => type.type.name === "water"));
-            } 
+            state.filter = action.payload;
+  
         },
         setSort(state, action){ 
             if (action.payload === "az") {
@@ -56,7 +53,7 @@ const pokemonSlice = createSlice({
     },
     extraReducers: (builder)=>{
         builder
-        .addCase(fetchPokemon.pending, (state, action)=>{
+        .addCase(fetchPokemon.pending, (state)=>{
             state.loading = true;
             state.error= null;
         })

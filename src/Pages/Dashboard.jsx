@@ -61,7 +61,7 @@ const Dashboard = () => {
                         {
                             list.map((pokemon)=>(
                                 
-                                <tr key={pokemon.id}  className='border-b border-gray-300 hover:bg-gray-200 transition-colors duration-200'>
+                                <tr key={pokemon.id} className='border-b border-gray-300 hover:bg-gray-200 transition-colors duration-200'>
                                      <td className='text-center p-2'>{pokemon.name} ⚡️ </td>
                                     <td className='text-center p-2'>{pokemon.base_experience}</td>
                                     <td className='text-center p-2'>{pokemon.weight}</td>
