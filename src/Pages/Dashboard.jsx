@@ -34,7 +34,7 @@ const Dashboard = () => {
                         <option value="water">Water</option>
                     </select>
                     <select name="" id="" className='mt-5 p-2 border border-gray-300 rounded ml-2' onChange={(e) => dispatch(setSort(e.target.value))}>
-                        <option value="all">All Types</option>
+                        <option value="all">Sort</option>
                         <option value="az">A-Z</option>
                         <option value="za">Z-A</option>
                     </select>
