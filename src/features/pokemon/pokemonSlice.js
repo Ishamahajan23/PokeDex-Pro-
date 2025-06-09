@@ -14,23 +14,22 @@ export const fetchPokemon = createAsyncThunk(
 const pokemonSlice = createSlice({
     name: "pokemon",
     initialState:{
+        originalList: [],
         list :[],
         offset: 0,
         filter: "all",
         sort: "az",
         loading: false,
-        error: null    
-
+        error: null
     },
     reducers:{
         setFilter(state, action){
-            if (action.payload === "all") {
-                state.list = state.list;
-            } else {
-                state.list = state.list.filter(pokemon => pokemon.types.some(type => type.type.name === action.payload));
-            }
             state.filter = action.payload;
-  
+            if (action.payload === "all") {
+                state.list = state.originalList;
+            } else {
+                state.list = state.originalList.filter(pokemon => pokemon.types.some(type => type.type.name === action.payload));
+            }
         },
         setSort(state, action){ 
             if (action.payload === "az") {
@@ -60,6 +59,8 @@ const pokemonSlice = createSlice({
         .addCase(fetchPokemon.fulfilled, (state, action)=>{
             state.loading =false;
             state.list = action .payload;
+            state.originalList = action.payload;
+            state.error = null;
 
         })
         .addCase(fetchPokemon.rejected, (state, action)=>{
